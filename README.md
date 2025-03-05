@@ -1,2 +1,0 @@
-# TFG-Miner
-Import turtles
