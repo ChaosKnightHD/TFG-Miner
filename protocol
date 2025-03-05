@@ -1,0 +1,14 @@
+-- Start the turtle with your pocket computer
+
+
+write("Type 'Mine' or 'Pack' for turtle>")
+while true do
+    rednet.open("back")
+    local input = read()
+    if input == "Mine" then
+     rednet.broadcast("Mine")
+    elseif input == "Pack" then
+     rednet.broadcast("Pack")
+    end
+end
+

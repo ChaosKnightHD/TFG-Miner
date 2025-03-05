@@ -1,0 +1,173 @@
+
+ 
+    --Turtle tuns 180 degrees
+function Turn180()
+    turtle.turnRight()
+    turtle.turnRight()
+end
+ 
+    -- Turtle searches for an item inside its inventory
+function searchItem(item)
+    for i=1,16 do
+        info = turtle.getItemDetail(i)
+        if info ~= nil then
+            if info.name == item then
+                print(item.."found at "..i)
+                return i end
+            else i =i+1
+            end
+        end
+    print(item.." not found")
+ return false
+end
+ 
+    -- Turtle builds 1 1x10 Spatial Pylon
+function buildPylon()
+    pylon = turtle.select(searchItem("ae2:spatial_pylon"))
+    print(pylon)
+    if pylon == false then
+        print("missing pylons")
+        return false
+    end
+    for i=1,10 do
+        while turtle.placeDown() == false do
+            turtle.digDown()
+            turtle.digUp()
+        end
+        turtle.up()
+        i = i+1
+    end
+end
+ 
+    --Turtle goes back down the pylon and lays cable
+function layCable()
+    cable = turtle.select(searchItem("ae2:fluix_smart_dense_cable"))
+    print(cable)
+    if cable == false then
+        print("missing cable")
+        return false
+    end
+    turtle.forward()
+    for i=1,9 do
+	    turtle.digDown()
+        turtle.down()
+        i=i+1
+    end
+    for k=1,5 do
+        while turtle.placeDown() == false do
+            turtle.digDown()
+            turtle.dig()
+        end
+        turtle.forward()
+        k=k+1
+    end
+ turtle.digDown()
+ turtle.down()
+end
+ 
+    --Build the outer ring
+function ringRow()
+    ring = turtle.select(searchItem("ae2:quantum_ring"))
+    if ring == false then
+        print("missing ring blocks")
+        return false
+    end
+    for k=1,3 do
+        while turtle.placeDown() == false do
+            turtle.digDown()
+            turtle.dig()
+        end
+     turtle.forward()
+        k=k+1
+    end
+    
+ 
+end
+ 
+    --Turtle activates the quantum link 
+function finalRing()
+    turtle.forward()
+    for i=1,8 do
+        turtle.digDown()    --Drop back down above the cable
+        turtle.down()
+        i=i+1
+    end
+    ringRow()
+ turtle.back()
+    turtle.up()
+    Turn180()
+    turtle.placeDown()
+    link = turtle.select(searchItem("ae2:quantum_link")) --Place the centre link
+    if link == false then
+        print("missing chamber link")
+        return false
+    end
+    turtle.forward()
+    turtle.placeDown()
+    singularity = turtle.select(searchItem("ae2:quantum_entangled_singularity")) --Insert the singularity 
+    if singularity == false then
+        print("missing singularity")
+        return false
+    end
+    turtle.dropDown()
+    ring = turtle.select(searchItem("ae2:quantum_ring")) --Finish the ring
+    if ring == false then
+        print("missing ring blocks")
+        return false
+    end
+    turtle.dig()
+    turtle.forward()
+    turtle.digDown()
+    turtle.placeDown()
+    Turn180()
+    turtle.up()
+    ringRow()
+end
+ 
+    -- Send a redstone pulse facing the IO port
+function togglePort()
+     redstone.setOutput("front", true)
+	 sleep()
+	 redstone.setOutput("front", false)
+end
+ 
+    --Turtle Turns on the miner
+function startCell()
+    for i=1,3 do
+        while turtle.back() == false do
+            turtle.dig("left")
+            turtle.dig("right")
+        end
+        i=i+1
+    end
+    port = turtle.select(searchItem("ae2:spatial_io_port"))
+    if port == false then
+        print("missing IO port")
+        return false
+    end
+    turtle.place()
+    cell = turtle.select(searchItem("ae2:spatial_storage_cell_16"))
+    if cell == false then
+        print("missing spatial cell")
+        return false
+    end
+    turtle.drop()
+    sleep(8)
+    togglePort()
+	turtle.suck()
+	turtle.drop()
+end
+        
+		
+	-- Main runtime
+buildPylon()
+turtle.turnRight()
+layCable()
+buildPylon()
+turtle.turnRight()
+layCable()
+buildPylon()
+Turn180()
+finalRing()
+startCell()
+shell.run("startup")

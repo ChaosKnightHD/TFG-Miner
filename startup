@@ -1,0 +1,10 @@
+	--your turtle startup program
+rednet.open("right")
+id, message = rednet.receive()
+if message == "Mine" then
+	shell.run("startMiner")
+elseif message == "Pack" then
+ shell.run("packMiner")
+else shell.run("dummy")
+end
+	

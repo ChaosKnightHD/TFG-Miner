@@ -1,0 +1,29 @@
+
+    -- Send a redstone pulse facing the IO port
+function togglePort()
+     redstone.setOutput("front", true)
+	 sleep()
+	 redstone.setOutput("front", false)
+end
+
+function readyPos()
+	togglePort()
+	turtle.suck()
+ turtle.drop()
+ togglePort()
+ turtle.suck()
+	for i=1,4 do
+		turtle.up()
+	end
+	turtle.turnLeft()
+	for k=1,6 do
+		turtle.forward()
+	end
+	turtle.turnRight()
+	turtle.back()
+	shell.run("deconstructer",7,7,10)
+end
+
+readyPos()
+shell.run("startup")
+

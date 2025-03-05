@@ -1,0 +1,48 @@
+Note:
+To use this program properly in TFG you already need a quantum gate setup into AE2 (IV minimum) and already have your large miner built.
+You can use energy p2p to supply the amperage and exporting the drilling fluid below, directly through the quantum gate. Or you can just batbuff + supertank onsite, your choice.
+If you want to have fun moving other 5x8x5 machines around on the go (a quad boiler lol) give it a try!
+
+Make sure you have these items in your turtle:
+- 10 Smart Dense cable 
+- 16^3 spatial storage cell (your miner must already be is inside it)
+- Spatial IO port
+- Entangled Singularity
+- 8 quantum Ring Blocks
+- Quantum Chamber
+- 30 spatial pylons
+- A pickaxe on turtle's left side (probably red steel best)
+- Wireless modem on turtle's right side
+
+And a pocket computer if you want remote access:
+Have a wireless modem on your pocket computer (type lua then type pocket.equipBack() on the interpreter). You can always just execute startMiner and packMiner directly inside the turtle.
+
+
+Installing the program(s) to your minecraft computers:
+1. Enter your world and make a turtle and pocket computer, its ID is displayed on tooltip
+2. Go to TerrafirmaGreg/saves/world/computercraft/computer
+3. For the Pocket Computer paste 'protocol'
+4. For the Turtle, paste the rest of the programs inside
+
+
+Alternatively you can use pastebin if you are playing on a server. Install the programs one by one and type these strings each (e.g pastebin get q1FzctMF deconstrutor).
+Make sure the program names are EXACTLY the same as the downloads or it won't work.
+
+Turtle:
+kuW7Bn9Z - startup 
+knshD1K1 - startMiner 
+aPCK2HQQ - packMiner 
+q1FzctMF - deconstructer 
+
+Pocket Computer:
+Gbanrsp2 - protocol 
+
+
+Operating it:
+- Type the protocol program in your pocket computer to receive the prompt
+- DO NOT let the turtle dig under collapsable dirt/stone, TFC debris breaks the turtle if it falls on top
+- Have the turtle chunk loaded at all times or it will freeze, just like the miner would gathering ore
+- If its snowing, the turtle may miss the cable placement if the snow pile grows just after the turtle clears the ground below. Have it build floating above ground as a guarantee. (Another TFC mechanic, not in Vanilla Java)
+
+Credit to Tristen for saving me alot of time rewriting the excavate function, used in deconstruction program:
+https://www.reddit.com/r/feedthebeast/comments/2eu4hm/turtle_program_to_dig_out_underground_room/
